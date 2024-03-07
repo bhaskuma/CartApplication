@@ -2,11 +2,18 @@ import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Cardsdata from './CardsData'
+import { useSelector, useDispatch } from 'react-redux'
+import Add from './redux/actions/action'
 import "./style.css";
 
 const Cards = () => {
 
     const [data, setData] = useState(Cardsdata)
+    const dispatch = useDispatch()
+    const value = useSelector((state) => state.cartreducer.carts)
+    const handlebutton = (e) => {
+        dispatch(Add(e))
+    }
     return (
         <div className='container mt-3'>
             <h2 className='text-center'>Add to Cart Projects</h2>
@@ -25,7 +32,7 @@ const Cards = () => {
                                         </Card.Text>
                                         <div className="button_div d-flex justify-content-center">
                                             <Button variant="primary"
-                                                className='col-lg-12'>Add to Cart</Button>
+                                                className='col-lg-12' onClick={() => handlebutton(element)}>Add to Cart</Button>
                                         </div>
 
                                     </Card.Body>
